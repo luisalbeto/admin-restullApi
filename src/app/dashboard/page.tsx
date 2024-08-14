@@ -13,11 +13,11 @@ export default async function DashboardPage() {
   }
 
   return(
-    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 max-w-full overflow-hidden">
             
     {/* TODO: src/components <WidgetItem /> */}
     <WidgetItem title="Usuario Conectado S-Side">
-      <div className="flex flex-col">
+      <div className="flex flex-col break-words">
         <span>{session.user?.name}</span>
         <span>{session.user?.image}</span>
         <span>{session.user?.email}</span>
