@@ -34,20 +34,11 @@ export const toggleTodo = async(id: string, complete: boolean): Promise<Todo> =>
 
 }
 
-export const addTodo = async(description: string)=> {
-  try{
+export const addTodo = async(description: string, userID: string)=> {
+  const todo = await prisma.todo.create({ data:{description, userID: '...'}})
+  revalidatePath('/dashboard/server-todos')
 
-    const todo = await prisma.todo.create({ data: {description} })
-  
-    revalidatePath('/dashboard/server-todos')
-    return todo
-
-  }catch(error){
-
-   return{ message: 'Error creando Todo'
-
-   }
-  }
+  return todo
 }
 
 export const deletedCompleted = async():Promise<void> => {

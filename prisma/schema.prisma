@@ -13,6 +13,9 @@ model Todo {
   complete    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  user   User   @relation(fields: [userID], references: [id])
+  userID String
 }
 
 //Auth.js
@@ -58,6 +61,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+
+  todos Todo[]
 
   @@map("users")
 }
