@@ -1,30 +1,26 @@
-'use client'
+import { auth } from "@/auth.config"
+import { redirect } from "next/navigation"
 
-import { useSession } from "next-auth/react"
-import { useEffect } from "react"
 
-export default function PRofilePage() {
+export default async function PRofilePage() {
 
-  const {data: session } = useSession()
+  const session = await auth()
   
-  useEffect(() => {
-    console.log('Client Side')
-  },[])
+  if( !session?.user){
+    redirect('/')
+  }
+
+
   
   
   return(
     <div>
-        <h1>ProfilePage</h1>
+        <h1>Perfil</h1>
         <hr/>
 
-        <div className="flex flex-col">
-          <span>{session?.user?.name ?? 'No Name'}</span>
-          <span>{session?.user?.email ?? 'No Email'}</span>
-          <span>{session?.user?.image ?? 'No Image'}</span>
-          <span>{session?.user?.id ?? 'No UUID'}</span>
-          <span>{session?.user?.roles?.join(',') ?? ['No-roles']}</span>
-
-        </div>
+        <pre>
+          {JSON.stringify(session.user, null, 2)}
+        </pre>
 
     </div>
   

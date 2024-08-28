@@ -1,11 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
-import { CiLogout } from "react-icons/ci"
 import { SidebarItem } from "./SidebarItem"
-import { IoBasketOutline, IoCalendarClearOutline, IoCheckboxOutline, IoCodeWorkingOutline, IoListOutline, IoPersonOutline } from "react-icons/io5"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { getServerSession } from "next-auth"
+import {IoCalendarClearOutline, IoListOutline, IoPersonOutline } from "react-icons/io5"
+import { logout } from "@/actions"
 import { LogoutButton } from "./LogOutButton"
+import { auth } from "@/auth.config"
 
 
 const menuItems = [
@@ -15,25 +14,17 @@ const menuItems = [
     path: '/dashboard'
   },
   {
-    icon: <IoCheckboxOutline/>,
-    title: 'Rest TODOS',
-    path: '/dashboard/rest-todos'
+    icon: <IoCalendarClearOutline/>,
+    title: 'Login',
+    path: '/auth/login'
   },
+ 
   {
     icon: <IoListOutline/>,
     title: 'Crear evento',
     path: '/dashboard/server-todos'
   },
-  {
-    icon: <IoCodeWorkingOutline/>,
-    title: 'Eventos',
-    path: '/dashboard/eventos'
-  },
-  {
-    icon: <IoBasketOutline/>,
-    title: 'Products',
-    path: '/dashboard/products'
-  },
+
   {
     icon: <IoPersonOutline/>,
     title: 'Perfil',
@@ -44,14 +35,17 @@ const menuItems = [
 
 export const Sidebar = async() => {
 
-  const session = await getServerSession(authOptions)
+  const session = await auth()
+  const userName = session?.user?.name ?? 'No Name'
+   const userRoles = session?.user?.roles ?? ['client']
 
-  const avatarUrl = ( session?.user?.image)
+
+  {/*const avatarUrl = ( session?.user?.image)
   ? session.user.image
   : 'https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg'
 
-  const userName = session?.user?.name ?? 'No Name'
-  const userRoles = session?.user?.roles ?? ['client']
+  
+  */}
 
   return(
     <>
@@ -71,18 +65,9 @@ export const Sidebar = async() => {
           </div>
 
           <div className="mt-8 text-center">
-            {/* Next/Image */}
-            <Image 
-              src={avatarUrl} 
-              alt="" 
-              className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" 
-              width={150} 
-              height={150}/>
-
               <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{userName}</h5>
               <span className="hidden text-gray-400 lg:block capitalize">
                 {userRoles.join(',')}
-
               </span>
           </div>
 
@@ -90,18 +75,14 @@ export const Sidebar = async() => {
             {
               menuItems.map( item => (
                 <SidebarItem key={ item.path } {...item}/>
-
-
               ))
             }
             
           </ul>
         </div>
 
-        <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-          <LogoutButton/>
-       
-        </div>
+          <LogoutButton/> 
+        
       </aside>
     </>
   )
