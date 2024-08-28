@@ -21,13 +21,13 @@ const menuItems = [
   },
   {
     icon: <IoListOutline/>,
-    title: 'Server Actions',
+    title: 'Crear evento',
     path: '/dashboard/server-todos'
   },
   {
     icon: <IoCodeWorkingOutline/>,
-    title: 'Cookies',
-    path: '/dashboard/cookies'
+    title: 'Eventos',
+    path: '/dashboard/eventos'
   },
   {
     icon: <IoBasketOutline/>,
