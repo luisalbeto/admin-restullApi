@@ -32,7 +32,7 @@ export const Sidebar = async() => {
 
   const session = await auth()
   const userName = session?.user?.name ?? 'No Name'
-   const userRoles = session?.user?.roles ?? ['client']
+   const userRoles = session?.user.role ?? ['client']
 
 
 
@@ -63,7 +63,7 @@ export const Sidebar = async() => {
           <div className="mt-8 text-center">
               <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{userName}</h5>
               <span className="hidden text-gray-400 lg:block capitalize">
-                {userRoles.join(',')}
+                {userRoles}
               </span>
           </div>
 

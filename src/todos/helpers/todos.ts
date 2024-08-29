@@ -32,7 +32,7 @@ export const updateTodo = async(id: string, complete: boolean):Promise<Todo> => 
 
 export const createTodo = async(description: string, title: string):Promise<Todo> => {
 
-  const body = { description }
+  const body = { description, title }
 
   const todo = await fetch(`/api/todos`,{
     method: 'POST',

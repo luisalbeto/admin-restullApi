@@ -22,6 +22,9 @@ export default async function PRofilePage() {
           {JSON.stringify(session.user, null, 2)}
         </pre>
 
+        <h2 className="text-3xl mb-10">{session.user.role}</h2>
+
+
     </div>
   
   )

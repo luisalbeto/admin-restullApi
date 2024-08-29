@@ -53,6 +53,7 @@ export const TodoItem = ({ todo, toggleTodo }: Props) => {
         </div>
         <div className="text-center sm:text-left">
           { todoOptimistic.description}
+          { todoOptimistic.title}
 
         </div>
 

@@ -12,15 +12,14 @@ export const NewTodo = () => {
   const router = useRouter()
 
   const [title, setTitle] = useState('')
-
   const [description, setDescription] = useState('')
 
 
   const onSubmit = async( e: FormEvent) => {
     e.preventDefault()
-    if( description.trim().length && title.trim().length === 0 ) return
+    if( description.trim().length || title.trim().length === 0 ) return
     
-    //await addTodo(description)
+    //await addTodo(description,title)
     await todosApi.createTodo(description, title)
     router.refresh()
     
@@ -35,6 +34,8 @@ export const NewTodo = () => {
 
   return (
     <form onSubmit={onSubmit} className='flex w-full'>
+
+      <div className="flex w-full gap-20">
       <input type="text"
         onChange={(e) => setDescription(e.target.value)}
         value={ description }
@@ -47,6 +48,9 @@ export const NewTodo = () => {
         value={ title }
         className="w-6/12 -ml-10 pl-3 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-sky-500 transition-all"
         placeholder="¿Qué titulo tendra tu evento?" />
+
+      </div>
+ 
 
       <button type='submit' className="flex items-center justify-center rounded ml-2 bg-sky-500 p-2 text-white hover:bg-sky-700 transition-all">
         Crear

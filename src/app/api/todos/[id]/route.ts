@@ -24,7 +24,7 @@ const session = await auth()
 
   const todo = await prisma.todo.findFirst({ where: { id }})
 
-  if( todo?.userID !== session.user?.id ){
+  if( todo?.userID !== session.user.id ){
     return null
   } 
 
