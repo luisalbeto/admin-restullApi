@@ -30,7 +30,7 @@ export const updateTodo = async(id: string, complete: boolean):Promise<Todo> => 
   return todo
 }
 
-export const createTodo = async( description: string):Promise<Todo> => {
+export const createTodo = async(description: string, title: string):Promise<Todo> => {
 
   const body = { description }
 

@@ -18,7 +18,7 @@ export default async function ServerTodosPage(){
   const session = await auth()
   
   if( !session?.user){
-    redirect('/')
+    redirect('/dashboard')
   }
 
 

@@ -5,6 +5,7 @@ import {IoCalendarClearOutline, IoListOutline, IoPersonOutline } from "react-ico
 import { logout } from "@/actions"
 import { LogoutButton } from "./LogOutButton"
 import { auth } from "@/auth.config"
+import { useSession } from "next-auth/react"
 
 
 const menuItems = [
@@ -12,13 +13,7 @@ const menuItems = [
     icon: <IoCalendarClearOutline/>,
     title: 'Dashboard',
     path: '/dashboard'
-  },
-  {
-    icon: <IoCalendarClearOutline/>,
-    title: 'Login',
-    path: '/auth/login'
-  },
- 
+  }, 
   {
     icon: <IoListOutline/>,
     title: 'Crear evento',
@@ -38,6 +33,7 @@ export const Sidebar = async() => {
   const session = await auth()
   const userName = session?.user?.name ?? 'No Name'
    const userRoles = session?.user?.roles ?? ['client']
+
 
 
   {/*const avatarUrl = ( session?.user?.image)

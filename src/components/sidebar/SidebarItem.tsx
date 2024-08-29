@@ -1,4 +1,5 @@
 'use client'
+import { useSession } from "next-auth/react";
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 
@@ -12,6 +13,8 @@ interface Props {
 export const SidebarItem = ({icon, path, title}:Props) => {
 
   const pathName = usePathname()
+  const { data: session} = useSession()
+  console.log({session})
 
 
      {/* Active className:  */}

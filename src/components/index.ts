@@ -7,3 +7,5 @@ export { WidgetItem } from './WidgetItem'
 export { TabBar } from './TabBar'
 
 export { LogoutButton } from './sidebar/LogOutButton'
+
+export { Provider } from './providers/Providers'

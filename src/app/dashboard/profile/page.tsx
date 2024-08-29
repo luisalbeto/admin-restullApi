@@ -7,7 +7,7 @@ export default async function PRofilePage() {
   const session = await auth()
   
   if( !session?.user){
-    redirect('/')
+    redirect('/dashboard')
   }
 
 
