@@ -2,10 +2,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { SidebarItem } from "./SidebarItem"
 import {IoCalendarClearOutline, IoListOutline, IoPersonOutline } from "react-icons/io5"
-import { logout } from "@/actions"
 import { LogoutButton } from "./LogOutButton"
 import { auth } from "@/auth.config"
-import { useSession } from "next-auth/react"
 
 
 const menuItems = [
@@ -21,6 +19,13 @@ const menuItems = [
   },
 
   {
+    icon: <IoListOutline/>,
+    title: 'Eventos',
+    path: '/dashboard/eventos'
+  },
+
+
+  {
     icon: <IoPersonOutline/>,
     title: 'Perfil',
     path: '/dashboard/profile'
@@ -31,8 +36,7 @@ const menuItems = [
 export const Sidebar = async() => {
 
   const session = await auth()
-  const userName = session?.user?.name ?? 'No Name'
-   const userRoles = session?.user.role ?? ['client']
+  const name = session?.user?.name ?? 'No Name'
 
 
 
@@ -61,9 +65,8 @@ export const Sidebar = async() => {
           </div>
 
           <div className="mt-8 text-center">
-              <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{userName}</h5>
+              <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{name}</h5>
               <span className="hidden text-gray-400 lg:block capitalize">
-                {userRoles}
               </span>
           </div>
 

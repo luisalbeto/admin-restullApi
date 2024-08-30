@@ -22,7 +22,7 @@ export const authConfig: NextAuthConfig = {
     },
 
     session({session, token, user}) {
-      console.log({session,token, user})
+     // console.log({session,token, user})
 
       session.user = token.data as any
 

@@ -17,11 +17,11 @@ const user = await prisma.user.create({
       roles: ['client', 'Admin', 'super-user'],
       todos: {
         create: [
-          {description: 'Gema del Alma', complete: true},
-          {description: 'Gema del Poder'},
-          {description: 'Gema del Espacio'},
-          {description: 'Gema del Tiempo'},
-          {description: 'Gema del Realidad'},
+          {description: 'Gema del Alma', complete: true, title:'1'},
+          {description: 'Gema del Poder',title:'2'},
+          {description: 'Gema del Espacio',title:'3'},
+          {description: 'Gema del Tiempo',title:'4'},
+          {description: 'Gema del Realidad',title:'5'},
         ]
       }
     }
