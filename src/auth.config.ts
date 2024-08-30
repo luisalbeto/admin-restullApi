@@ -54,9 +54,6 @@ export const authConfig: NextAuthConfig = {
           //Regresar el usuario sin el password
           const { password: _, ...rest} = user
 
-
-
-
           return rest
       },
     }),

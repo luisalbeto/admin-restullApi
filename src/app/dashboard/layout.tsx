@@ -19,7 +19,7 @@ export default function DashboardLayout({
     
 
         {/* TODO: Contenido en el Layout.tsx */}
-        <div className="px-6 pt-6 bg-white m-2 p-2 pb-5 rounded">
+        <div className="px-10 pt-6 m-2 p-2 pb-5 rounded shadow-lg">
 
           {/* TODO: dashboard/page.tsx  */}
           {/* Este contenido va dentro de page.tsx */}

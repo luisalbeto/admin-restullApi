@@ -29,13 +29,12 @@ export default async function ServerTodosPage(){
 
   return(
   <>
-  <span className="text-3xl mb-10">Crear un evento SSR</span>
+  <h1 className="text-3xl mb-10 text-center font-bold">Crear un evento Server Side Rendering</h1>
     <div className="w-full px-3 mx-5 mb-5">
     <NewTodo/>
 
 
     </div>
-    <TodosGrid todos={ todos }/>
   </>
   )
 }

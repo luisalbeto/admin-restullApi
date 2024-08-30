@@ -6,6 +6,7 @@ import { TodoItem } from "./TodoItem";
 import * as todosApi from '@/todos/helpers/todos'
 import { useRouter } from "next/navigation";
 import { toggleTodo } from "../actions/todo-actions";
+import Link from "next/link";
 
 
 interface Props {
@@ -27,7 +28,12 @@ export const TodosGrid = ({ todos = [] }: Props) => {
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
       {
         todos.map( todo => (
-          <TodoItem key={todo.id} todo={todo} toggleTodo={ toggleTodo }/>
+          <Link href='/dashboard/evento'
+            className="focus">
+                    <TodoItem key={todo.id} todo={todo} toggleTodo={ toggleTodo }/>
+
+    
+          </Link>
         ))
       }
     </div>

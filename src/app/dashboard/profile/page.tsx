@@ -1,4 +1,6 @@
 import { auth } from "@/auth.config"
+import prisma from "@/lib/prisma"
+import { TodosGrid } from "@/todos"
 import { redirect } from "next/navigation"
 
 
@@ -10,20 +12,22 @@ export default async function PRofilePage() {
     redirect('/dashboard')
   }
 
+  const todos = await prisma.todo.findMany({ 
+    where: { userID: session.user.id},
+    orderBy: { description: 'asc' }
+   })
+  
 
   
   
   return(
     <div>
-        <h1>Perfil</h1>
+        <h1 className="text-3xl font-bold">Perfil de {session.user.userName}</h1>
         <hr/>
 
-        <pre>
-          {JSON.stringify(session.user, null, 2)}
-        </pre>
-
-        <h2 className="text-3xl mb-10">{session.user.role}</h2>
-
+        <div className="text-3xl pt-2">
+              <TodosGrid todos={ todos }/>
+        </div>
 
     </div>
   

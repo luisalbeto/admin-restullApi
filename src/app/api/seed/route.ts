@@ -7,7 +7,10 @@ export async function GET(request: Request) {
   await prisma.user.deleteMany()
 
  
-const user = await prisma.user.create({
+
+
+
+{/*const user = await prisma.user.create({
     data:{
       name: 'Luis',
       lastName: 'Ramirez',
@@ -25,10 +28,7 @@ const user = await prisma.user.create({
         ]
       }
     }
-  })
-
-
-
+  }) */}
 
 
 

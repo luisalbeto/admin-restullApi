@@ -37,6 +37,8 @@ export const Sidebar = async() => {
 
   const session = await auth()
   const name = session?.user?.name ?? 'No Name'
+  const lastName = session?.user?.lastName ?? 'No lastName'
+
 
 
 
@@ -64,9 +66,10 @@ export const Sidebar = async() => {
             </Link>
           </div>
 
-          <div className="mt-8 text-center">
-              <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{name}</h5>
+          <div className="mt-8 text-center flex-row">
               <span className="hidden text-gray-400 lg:block capitalize">
+              <p className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{name} {lastName}</p>
+
               </span>
           </div>
 

@@ -52,8 +52,20 @@ export const TodoItem = ({ todo, toggleTodo }: Props) => {
 
         </div>
         <div className="text-center sm:text-left">
-          { todoOptimistic.description}
-          { todoOptimistic.title}
+          <span className='text-2xl font-bold'>Titulo: { todoOptimistic.title} </span>
+
+        <hr/>
+        <span className='text-xl'>
+        Descripcion: { todoOptimistic.description}
+
+        {/*TODO: Fecha de inicio */}
+
+
+
+        </span>
+
+
+
 
         </div>
 

@@ -26,26 +26,28 @@ export const LoginForm = () => {
   return (
     <form action={ dispatch } className="flex flex-col">
 
-   <label>Nombre</label>
+   <label className='font-semibold'>Nombre</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="text"
         name="name" />
 
-      <label>Apellido</label>
+      <label className='font-semibold'>Apellido</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="text"
         name="lastName"
         />
 
-      <label>Usuario</label>
+      <label className='font-bold'>Usuario</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="text"
         name="userName" />
 
-      <label htmlFor="email">Correo electrónico</label>
+      <label
+      className='font-bold'
+       htmlFor="email">Correo electrónico</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="email"
@@ -53,7 +55,9 @@ export const LoginForm = () => {
         />
 
 
-      <label htmlFor="email">Contraseña</label>
+      <label
+      className='font-bold'
+      htmlFor="email">Contraseña</label>
       <input
         className="px-5 py-2 border bg-gray-200 rounded mb-5"
         type="password"

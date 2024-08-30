@@ -31,8 +31,8 @@ export async function GET(request: Request){
 
 
 const postSchema = yup.object({
-  description: yup.string().required(),
   title: yup.string().required(),
+  description: yup.string().required(),
   complete: yup.boolean().optional().default(false),
 
 })
@@ -48,7 +48,7 @@ export async function POST(request: Request){
   try{
     const {complete, description , title} = await postSchema.validate( await request.json())
 
-    const todo = await prisma.todo.create({ data: {complete, description, title ,userID: session.user.id } })
+    const todo = await prisma.todo.create({ data: {complete, title, description, userID: session.user.id } })
   
   
     return NextResponse.json(todo)
