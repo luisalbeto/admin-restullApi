@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 
 export async function GET(request: Request) {
   await prisma.todo.deleteMany()
-  await prisma.user.deleteMany()
+ // await prisma.user.deleteMany()
 
  
 

@@ -13,8 +13,8 @@ interface Props {
 export const SidebarItem = ({icon, path, title}:Props) => {
 
   const pathName = usePathname()
-  const { data: session} = useSession()
-  console.log({session})
+  //const { data: session} = useSession()
+ // console.log({session})
 
 
      {/* Active className:  */}
