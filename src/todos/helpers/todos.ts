@@ -30,9 +30,9 @@ export const updateTodo = async(id: string, complete: boolean):Promise<Todo> => 
   return todo
 }
 
-export const createTodo = async( description: string):Promise<Todo> => {
+export const createTodo = async(title: string, description: string, eventDate: string ):Promise<Todo> => {
 
-  const body = { description }
+  const body = { title , description, eventDate  }
 
   const todo = await fetch(`/api/todos`,{
     method: 'POST',

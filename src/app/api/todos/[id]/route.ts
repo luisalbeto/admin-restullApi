@@ -1,4 +1,4 @@
-import { getUserSessionServer } from "@/auth/actions/auth-actions";
+import { auth } from "@/auth.config";
 import prisma from "@/lib/prisma";
 import { Todo } from "@prisma/client";
 import { NextResponse, NextRequest } from "next/server";
@@ -13,16 +13,18 @@ interface Segments {
 
 const getTodo = async( id: string ):Promise<Todo | null> => {
 
-  const user = await getUserSessionServer()
+const session = await auth()
 
-  if(!user){
+  
+
+  if(!session?.user){
     return null
   }
 
 
   const todo = await prisma.todo.findFirst({ where: { id }})
 
-  if( todo?.userID !== user.id ){
+  if( todo?.userID !== session.user.id ){
     return null
   } 
 
@@ -71,8 +73,6 @@ export async function PUT(request: Request, {params}: Segments) {
   }catch(error){
     return NextResponse.json(error, {status: 400})
 
-  }
-
- 
+  } 
 }
 

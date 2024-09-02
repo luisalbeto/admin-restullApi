@@ -1,7 +1,6 @@
 import { auth } from "@/auth.config"
 import prisma from "@/lib/prisma"
 import { TodosGrid } from "@/todos"
-import Link from "next/link"
 import { redirect } from "next/navigation"
 
 
@@ -18,17 +17,18 @@ export default async function PRofilePage() {
     orderBy: { description: 'asc' }
    })
   
-
-  
   
   return(
     <div>
-        <h1 className="text-3xl font-bold">Perfil de {session.user.userName}</h1>
+        <h1 className="text-3xl font-bold">Eventos</h1>
         <hr/>
 
+      
+
         <div className="text-3xl pt-2">
-          <TodosGrid todos={ todos }/>
+              <TodosGrid todos={ todos }/>
         </div>
+
 
     </div>
   

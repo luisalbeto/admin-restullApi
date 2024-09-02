@@ -1,5 +1,5 @@
 
-import { getUserSessionServer } from '@/auth/actions/auth-actions'
+import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
 import {NextResponse, NextRequest} from 'next/server'
 
@@ -31,45 +31,55 @@ export async function GET(request: Request){
 
 
 const postSchema = yup.object({
+  title: yup.string().required(),
   description: yup.string().required(),
   complete: yup.boolean().optional().default(false),
+  eventDate: yup
+    .date()
+    .required('La fecha del evento es obligatoria')
+    .min(new Date(), 'La fecha del evento no puede ser anterior a hoy'),
+});
 
-})
+export async function POST(request: Request) {
+  const session = await auth();
 
-export async function POST(request: Request){
-
-  const user = await getUserSessionServer()
-
-  if(!user){
-    return NextResponse.json('No autorizado',{ status: 401 })
+  if (!session) {
+    return NextResponse.json('No autorizado', { status: 401 });
   }
 
-  try{
-    const {complete, description} = await postSchema.validate( await request.json())
+  try {
+    // Validar los datos del cuerpo de la solicitud
+    const { complete, description, title, eventDate } = await postSchema.validate(await request.json(), { abortEarly: false });
 
-    const todo = await prisma.todo.create({ data: {complete, description, userID: user.id} })
-  
-  
-    return NextResponse.json(todo)
+    // Crear el Todo con eventDate
+    const todo = await prisma.todo.create({
+      data: {
+        complete,
+        title,
+        description,
+        eventDate, // Asegurarse de incluir eventDate aquí
+        userID: session.user.id,
+      },
+    });
 
-  }catch(error){
-
-   return NextResponse.json(error, {status: 400})
+    return NextResponse.json(todo);
+  } catch (error) {
+    console.error('Error:', error); // Agregar un console.log para depurar
+    return NextResponse.json({ message: 'Error de validación', details: error }, { status: 400 });
   }
- 
 }
 
 export async function DELETE(request: Request){
-  const user = await getUserSessionServer()
+  const session = await auth()
 
-  if(!user){
+  if(!session){
     return NextResponse.json('No autorizado',{ status: 401 })
   }
 
 
   try{
 
-     await prisma.todo.deleteMany({ where: {complete: true, userID: user.id} })
+     await prisma.todo.deleteMany({ where: {complete: true, userID: session.user?.id} })
   
   
     return NextResponse.json('Borrados')

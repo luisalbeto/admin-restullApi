@@ -6,6 +6,7 @@ import { Todo } from "@prisma/client"
 
 import styles from './TodoItem.module.css'
 import { IoCheckboxOutline, IoSquareOutline } from "react-icons/io5";
+import Link from 'next/link';
 
 interface Props{
   todo: Todo;
@@ -13,6 +14,8 @@ interface Props{
   toggleTodo: (id: string, complete: boolean) => Promise<Todo|void>
 }
 export const TodoItem = ({ todo, toggleTodo }: Props) => {
+
+  const { id } = todo
 
   const [ todoOptimistic, toggleTodoOptimistic ] = useOptimistic(
     todo,
@@ -52,8 +55,21 @@ export const TodoItem = ({ todo, toggleTodo }: Props) => {
 
         </div>
         <div className="text-center sm:text-left">
-          { todoOptimistic.description}
+          <span className='text-2xl font-bold'>Titulo: { todoOptimistic.title} </span>
 
+        <hr/>
+        <span className='text-xl'>
+        Descripcion: { todoOptimistic.description}
+        </span>
+        <hr/>
+        <Link href={`/dashboard/evento/${id}`}>
+        <span className='text-xl'>
+
+          Inicia: {todoOptimistic.eventDate.toDateString()}
+        </span>
+        
+        </Link>
+      
         </div>
 
       </div>
