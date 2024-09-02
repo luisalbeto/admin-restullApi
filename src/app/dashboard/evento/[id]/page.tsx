@@ -24,12 +24,22 @@ export default async function EventPage({ params }: Props) {
  
 
   return (
-    <div>
-      <h1>Evento: {todo.title}</h1>
-      <p>Descripción: {todo.description}</p>
-      <p>Fecha del evento: {new Date(todo.eventDate).toLocaleDateString()}</p>
-      <hr/>
-      <CountdownTimer eventDate={todo.eventDate} />
+    <div className="flex justify-center min-h-screen bg-blue-100 p-4">
+      <div className="bg-white shadow-lg rounded-lg w-full max-w-4xl p-6">
+        <h1 className="text-3xl font-bold text-blue-700 mb-4">
+          Evento: {todo.title}
+        </h1>
+        <p className="text-lg text-gray-700 mb-2">
+          <span className="font-semibold">Descripción:</span> {todo.description}
+        </p>
+        <p className="text-lg text-gray-700 mb-4">
+          <span className="font-semibold">Fecha del evento:</span> {new Date(todo.eventDate).toLocaleDateString()}
+        </p>
+        <hr className="border-blue-300 mb-4" />
+        <div className="bg-blue-50 rounded-lg p-4">
+          <CountdownTimer eventDate={todo.eventDate} />
+        </div>
+      </div>
     </div>
   );
 }

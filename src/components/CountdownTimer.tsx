@@ -38,10 +38,10 @@ export const CountdownTimer = ({ eventDate }: CountdownTimerProps) => {
   }, [eventDate]);
 
   return (
-    <div>
-      <h2>Cuenta Regresiva</h2>
-      <p>{timeRemaining}</p>
-    </div>
+    <div className="bg-blue-50 rounded-lg p-6 text-center">
+    <h2 className="text-2xl font-semibold text-blue-700 mb-2">Cuenta Regresiva</h2>
+    <p className="text-xl font-mono text-blue-600">{timeRemaining}</p>
+  </div>
   );
 };
 
