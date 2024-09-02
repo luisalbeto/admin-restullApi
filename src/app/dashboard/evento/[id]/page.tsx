@@ -4,6 +4,7 @@ import { CountdownTimer } from "@/components";
 import prisma from "@/lib/prisma";
 import { Todo } from "@prisma/client";
 import { useEffect, useState } from "react";
+import NotFound from "./not-found";
 
 interface Props {
   params: { id: string };
@@ -18,13 +19,13 @@ export default async function EventPage({ params }: Props) {
 
 
   if (!todo) {
-    return <div>Evento no encontrado</div>;
+    return <NotFound/>;
   }
 
  
 
   return (
-    <div className="flex justify-center min-h-screen bg-blue-100 p-4">
+    <div className="flex justify-center items-center min-h-screen bg-blue-100 p-4">
       <div className="bg-white shadow-lg rounded-lg w-full max-w-4xl p-6">
         <h1 className="text-3xl font-bold text-blue-700 mb-4">
           Evento: {todo.title}
