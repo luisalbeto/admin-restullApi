@@ -1,5 +1,5 @@
 import { auth } from "@/auth.config";
-import { WidgetItem } from "@/components";
+import { TopMenu, WidgetItem } from "@/components";
 import prisma from "@/lib/prisma";
 import { Todo } from "@prisma/client";
 import { GetServerSideProps } from "next";
@@ -28,8 +28,10 @@ if( !session?.user){
   const todos = await getTodos();
 
   return (
-    <div className="min-h-screen bg-blue-100 p-8">
-      <h1 className="text-4xl font-bold text-blue-700 mb-8">Todos los Eventos</h1>
+    <div className="min-h-screen bg-white p-8 rounded">
+              <TopMenu/>
+
+      <h1 className="text-4xl font-bold text-blue-700 mb-8 pt-4">Todos los Eventos</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {todos.map(todo => (
           <div key={todo.id} className="bg-white shadow-md rounded-lg p-6">
