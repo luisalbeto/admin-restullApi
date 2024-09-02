@@ -1,22 +1,31 @@
 import { auth } from "@/auth.config";
-import { TopMenu, WidgetItem } from "@/components";
+import { TopMenu, UserFilter, WidgetItem } from "@/components";
 import prisma from "@/lib/prisma";
-import { Todo } from "@prisma/client";
+import { Todo, User } from "@prisma/client";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export const revalidate = 60; // Opcional: Revalida la página cada 60 segundos
 
-async function getTodos(): Promise<Todo[]> {
+async function getUsers(): Promise<User[]> {
+  return prisma.user.findMany();
+}
+
+
+async function getTodos(userID?: string): Promise<Todo[]> {
+  const where = userID ? { userID } : {};
+
+
   return prisma.todo.findMany({
+    where,
     orderBy: {
       eventDate: 'asc',
     },
   });
 }
 
-export default async function EventosPage() {
+export default async function EventosPage({ searchParams }: { searchParams: { userID?: string } }) {
 
   const session = await auth()
   
@@ -24,14 +33,17 @@ if( !session?.user){
   redirect('/auth/login')
 }
 
+const users = await getUsers();
 
-  const todos = await getTodos();
+  const todos = await getTodos(searchParams.userID);
 
   return (
     <div className="min-h-screen bg-white p-8 rounded">
               <TopMenu/>
 
       <h1 className="text-4xl font-bold text-blue-700 mb-8 pt-4">Todos los Eventos</h1>
+      <UserFilter users={users} selectedUserId={searchParams.userID} />
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {todos.map(todo => (
           <div key={todo.id} className="bg-white shadow-md rounded-lg p-6">
