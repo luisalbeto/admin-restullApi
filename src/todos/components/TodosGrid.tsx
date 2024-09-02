@@ -30,8 +30,6 @@ export const TodosGrid = ({ todos = [] }: Props) => {
         todos.map( todo => (
       
                     <TodoItem key={todo.id} todo={todo} toggleTodo={ toggleTodo }/>
-
-    
         ))
       }
     </div>

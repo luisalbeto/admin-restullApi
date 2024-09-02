@@ -1,6 +1,7 @@
 import { auth } from "@/auth.config"
 import prisma from "@/lib/prisma"
 import { TodosGrid } from "@/todos"
+import Link from "next/link"
 import { redirect } from "next/navigation"
 
 
@@ -26,7 +27,7 @@ export default async function PRofilePage() {
         <hr/>
 
         <div className="text-3xl pt-2">
-              <TodosGrid todos={ todos }/>
+          <TodosGrid todos={ todos }/>
         </div>
 
     </div>

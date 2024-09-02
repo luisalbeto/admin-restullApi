@@ -34,9 +34,10 @@ export const NewTodo = () => {
       data.description,
       data.eventDate
     );
+    
 
     router.refresh();
-    router.replace('/dashboard/eventos');
+    router.replace(`/dashboard/eventos`);
 
     reset(); // Reiniciar el formulario
   };
