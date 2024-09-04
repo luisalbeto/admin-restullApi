@@ -40,31 +40,25 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const todoId = searchParams.get('todoId');
-  const take = Number(searchParams.get('take') ?? 10);
-  const skip = Number(searchParams.get('skip') ?? 0);
 
   if (!todoId) {
     return NextResponse.json({ message: 'El ID del evento es obligatorio' }, { status: 400 });
   }
 
-  if (isNaN(take) || isNaN(skip)) {
-    return NextResponse.json({ message: 'Take y Skip deben ser números' }, { status: 400 });
-  }
-
   try {
     const comments = await prisma.comment.findMany({
       where: { todoId },
-      take,
-      skip,
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: 'desc' }, // Ordenar por fecha de creación, opcional
     });
 
     return NextResponse.json(comments);
   } catch (error) {
     console.error('Error:', error);
-    return NextResponse.json({ message: 'Error al obtener los comentarios', details: error }, { status: 500 });
+    return NextResponse.json({ message: 'Error al obtener los comentarios', details: error }, { status: 400 });
   }
 }
+
+
 
 export async function DELETE(request: Request) {
   const session = await auth();

@@ -8,8 +8,6 @@ interface FormValues {
   content: string;
 }
 
-
-
 interface CommentFormProps {
   userId: string;
   todoId: string;
@@ -29,21 +27,27 @@ export const CommentForm: React.FC<CommentFormProps> = ({ userId, todoId }) => {
       return;
     }
 
-    // Crear el comentario con contenido, userId y todoId
-    await commentsApi.createComment(
-      data.content,
-      userId,
-      todoId
-    );
+    try {
+      // Crear el comentario con contenido, userId y todoId
+      await commentsApi.createComment(
+        data.content,
+        userId,
+        todoId
+      );
 
-    router.refresh();
+      // Hacer refresh de la página después de crear el comentario
+      router.refresh();
 
-    reset(); // Reiniciar el formulario
+      // Reiniciar el formulario
+      reset(); 
+    } catch (error) {
+      console.error('Error al crear el comentario:', error);
+      // Manejar errores según sea necesario (mostrar mensaje al usuario, etc.)
+    }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full max-w-lg mx-auto space-y-4 p-4 bg-white rounded-lg shadow-lg">
-      
       <textarea
         {...register('content', { required: 'El contenido del comentario es obligatorio' })}
         className={`w-full pl-3 pr-3 py-2 rounded-lg border-2 border-gray-300 outline-none focus:border-sky-500 transition-all ${errors.content ? 'border-red-500' : ''}`}

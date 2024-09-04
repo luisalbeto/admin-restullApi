@@ -20,14 +20,14 @@ const menuItems = [
 
   {
     icon: <IoListOutline/>,
-    title: 'Eventos',
+    title: 'Mis Eventos',
     path: '/dashboard/eventos'
   },
 
 
   {
     icon: <IoPersonOutline/>,
-    title: 'Perfil',
+    title: 'Cuenta',
     path: '/dashboard/profile'
   },
 ]
