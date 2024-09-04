@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { User } from '@prisma/client';
 import { useRouter } from 'next/navigation';
 
@@ -13,7 +14,7 @@ export const UserFilter = ({ users, selectedUserId }: UserFilterProps) => {
   const handleUserChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const userId = event.target.value;
     if (userId) {
-      router.push(`/dashboard?userId=${userId}`);
+      router.push(`/dashboard?userID=${userId}`);
     } else {
       router.push('/dashboard');
     }
@@ -40,4 +41,4 @@ export const UserFilter = ({ users, selectedUserId }: UserFilterProps) => {
       </select>
     </div>
   );
-}
+};

@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 
 export const metadata = {
-  title: 'Listado de Todos',
+  title: 'Nuevo Evento',
   description: 'SEO Title'
 }
 

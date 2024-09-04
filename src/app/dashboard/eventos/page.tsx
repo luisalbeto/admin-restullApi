@@ -20,7 +20,7 @@ export default async function PRofilePage() {
   
   return(
     <div>
-        <h1 className="text-3xl font-bold">Eventos</h1>
+        <h1 className="text-3xl font-bold">Mis Eventos</h1>
         <hr/>
 
       

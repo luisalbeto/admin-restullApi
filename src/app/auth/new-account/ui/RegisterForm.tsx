@@ -152,7 +152,7 @@ export const RegisterForm = () => {
       </div>
 
       <Link href="/auth/login" className="btn-secondary text-center">
-        Ingresar
+        Inicia Sesion
       </Link>
 
     </form>
