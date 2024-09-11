@@ -2,17 +2,19 @@ import prisma from '@/lib/prisma';
 import { auth } from '@/auth.config';
 import { User, Todo } from '@prisma/client';
 import NotFound from './not-found';
+import { redirect, useRouter } from 'next/navigation';
 
 interface Props {
   params: { id: string };
 }
 
 export default async function UserProfilePage({ params }: Props) {
+
   // Obtén la sesión del usuario autenticado
   const session = await auth();
 
   if (!session) {
-    return <NotFound />;
+    redirect('/auth/login')
   }
 
   const { id } = params;
@@ -23,7 +25,7 @@ export default async function UserProfilePage({ params }: Props) {
   });
 
   if (!user) {
-    return <NotFound />;
+    redirect('/auth/login');
   }
 
   // Obtén los eventos creados por el usuario

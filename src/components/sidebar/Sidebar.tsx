@@ -5,49 +5,44 @@ import {IoCalendarClearOutline, IoListOutline, IoPersonOutline } from "react-ico
 import { LogoutButton } from "./LogOutButton"
 import { auth } from "@/auth.config"
 
-
-const menuItems = [
-  {
-    icon: <IoCalendarClearOutline/>,
-    title: 'Dashboard',
-    path: '/dashboard'
-  }, 
-  {
-    icon: <IoListOutline/>,
-    title: 'Crear evento',
-    path: '/dashboard/server-todos'
-  },
-
-  {
-    icon: <IoListOutline/>,
-    title: 'Mis Eventos',
-    path: '/dashboard/eventos'
-  },
-
-
-  {
-    icon: <IoPersonOutline/>,
-    title: 'Cuenta',
-    path: '/dashboard/profile'
-  },
-]
-
-
 export const Sidebar = async() => {
 
   const session = await auth()
+
+  const userId = session?.user?.id ?? 'default-id'; 
+
+
   const name = session?.user?.name ?? 'No Name'
   const lastName = session?.user?.lastName ?? 'No lastName'
 
 
-
-
-  {/*const avatarUrl = ( session?.user?.image)
-  ? session.user.image
-  : 'https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg'
-
+  const menuItems = [
+    {
+      icon: <IoCalendarClearOutline/>,
+      title: 'Dashboard',
+      path: '/dashboard'
+    }, 
+    {
+      icon: <IoListOutline/>,
+      title: 'Crear evento',
+      path: '/dashboard/server-todos'
+    },
   
-  */}
+    {
+      icon: <IoListOutline/>,
+      title: 'Mis Eventos',
+      path: '/dashboard/eventos'
+    },
+  
+  
+    {
+      icon: <IoPersonOutline/>,
+      title: 'Perfil',
+      path: `/dashboard/profile/${userId}`
+    },
+  ]
+
+
 
   return(
     <>

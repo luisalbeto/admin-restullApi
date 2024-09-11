@@ -2,7 +2,6 @@
 
 import { login, registerUser } from "@/actions"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 
@@ -31,7 +30,7 @@ export const RegisterForm = () => {
     }
 
     await login(email.toLocaleLowerCase(), name, lastName, userName, password)
-    window.location.replace('/dashboard/profile')
+    window.location.replace('/dashboard/')
   }
 
   return (

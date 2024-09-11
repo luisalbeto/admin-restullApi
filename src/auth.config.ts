@@ -35,15 +35,15 @@ export const authConfig: NextAuthConfig = {
     credentials({
       async authorize(credentials){
         const parsedCredentials = z
-          .object({ email: z.string().email(), name: z.string().max(30), lastName: z.string().max(30), userName: z.string(), password: z.string().min(8) })
+          .object({ email: z.string().email(), password: z.string().min(8) })
           .safeParse(credentials)
 
           if( !parsedCredentials.success ) return null
 
-          const {email, name, lastName, userName, password} = parsedCredentials.data
+          const {email, password} = parsedCredentials.data
 
           //Buscar el correo y usuario
-          const user = await prisma.user.findUnique({where: {email: email.toLocaleLowerCase(), userName }})
+          const user = await prisma.user.findUnique({where: {email: email.toLocaleLowerCase()}})
 
           //Comparar las contraseñas
 
