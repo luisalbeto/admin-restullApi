@@ -1,37 +1,28 @@
 'use server';
  
 import { signIn } from '@/auth.config';
-import { sleep } from '@/utils'
-import { AuthError } from 'next-auth';
- 
-// ...
- 
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
-  try {
-
-    //await sleep(2)
-
-    await signIn('credentials', {
-      ...Object.fromEntries(formData),
-      redirect: false,
-    });
-
-    return 'Success'
 
 
-  } catch (error) {
+export const loginUser = async(email: string, password: string) => {
 
-    if((error as any ).type === 'CredentialsSignin') {
-      return 'CredentialsSignin'
+  try{
+
+   await signIn('credentials',{email, password})
+    return{
+      ok: true,
+      message: 'Sesion iniciada'
     }
-    
-    return 'UnknownError'
+  }catch(error){
+    console.log(error)
+    return{
+      ok: false,
+      message: 'No se pudo iniciar sesionnn'
+    }
   }
-}
 
+}
+ 
+ 
 export const login = async(email: string, name: string, userName: string, lastName: string, password: string) => {
 
   try{
@@ -51,3 +42,4 @@ export const login = async(email: string, name: string, userName: string, lastNa
   }
 
 }
+
