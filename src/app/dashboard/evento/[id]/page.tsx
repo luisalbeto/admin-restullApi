@@ -5,6 +5,7 @@ import { CommentForm } from "@/comments/components/CommentForm";
 import { auth } from '@/auth.config';
 import { CommentList } from "@/comments/components/CommentList";
 import Link from "next/link";
+import { CommentSection } from "@/comments/components/CommentSection";
 
 interface Props {
   params: { id: string };
@@ -51,8 +52,7 @@ export default async function EventPage({ params }: Props) {
           <CountdownTimer eventDate={todo.eventDate} />
           
           {/* Pasa el userId obtenido de la sesión al CommentForm */}
-          <CommentForm todoId={todo.id} userId={session.user.id} />
-          <CommentList todoId={todo.id} />
+          <CommentSection todoId={todo.id} userId={session.user.id} userName={session.user.name}/>
         </div>
       </div>
     </div>

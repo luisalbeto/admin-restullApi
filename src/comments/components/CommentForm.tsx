@@ -2,7 +2,6 @@
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as commentsApi from '@/comments/helpers/comments';
-import { useRouter } from 'next/navigation';
 
 interface FormValues {
   content: string;
@@ -11,16 +10,15 @@ interface FormValues {
 interface CommentFormProps {
   userId: string;
   todoId: string;
+  onCommentAdded: (newComment: any) => void;
 }
 
-export const CommentForm: React.FC<CommentFormProps> = ({ userId, todoId }) => {
+export const CommentForm: React.FC<CommentFormProps> = ({ userId, todoId, onCommentAdded }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormValues>({
     defaultValues: {
       content: '',
     }
   });
-  
-  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     if (!data.content.trim()) {
@@ -29,20 +27,19 @@ export const CommentForm: React.FC<CommentFormProps> = ({ userId, todoId }) => {
 
     try {
       // Crear el comentario con contenido, userId y todoId
-      await commentsApi.createComment(
+      const newComment = await commentsApi.createComment(
         data.content,
         userId,
         todoId
       );
 
-      // Hacer refresh de la página después de crear el comentario
-      router.refresh();
+      // Llamar a la función onCommentAdded para actualizar la lista de comentarios
+      onCommentAdded(newComment);
 
       // Reiniciar el formulario
-      reset(); 
+      reset();
     } catch (error) {
       console.error('Error al crear el comentario:', error);
-      // Manejar errores según sea necesario (mostrar mensaje al usuario, etc.)
     }
   };
 

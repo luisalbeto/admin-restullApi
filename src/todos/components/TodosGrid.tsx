@@ -7,6 +7,7 @@ import * as todosApi from '@/todos/helpers/todos'
 import { useRouter } from "next/navigation";
 import { toggleTodo } from "../actions/todo-actions";
 import Link from "next/link";
+import { useEffect } from "react";
 
 
 interface Props {
@@ -23,6 +24,11 @@ export const TodosGrid = ({ todos = [] }: Props) => {
     console.log({updatedTodo})
     router.refresh()
   }
+ 
+  useEffect(() => {
+    router.refresh(); 
+  }, [router]);
+
 
   return(
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
