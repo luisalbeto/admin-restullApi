@@ -50,8 +50,10 @@ export default async function EventPage({ params }: Props) {
         <hr className="border-blue-300 mb-4" />
         <div className="bg-white rounded-lg p-4">
           <CountdownTimer eventDate={todo.eventDate} />
+
+
+          {/*Comment Section */}
           
-          {/* Pasa el userId obtenido de la sesión al CommentForm */}
           <CommentSection todoId={todo.id} userId={session.user.id} userName={session.user.name}/>
         </div>
       </div>

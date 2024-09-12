@@ -26,17 +26,14 @@ export const CommentForm: React.FC<CommentFormProps> = ({ userId, todoId, onComm
     }
 
     try {
-      // Crear el comentario con contenido, userId y todoId
       const newComment = await commentsApi.createComment(
         data.content,
         userId,
         todoId
       );
 
-      // Llamar a la función onCommentAdded para actualizar la lista de comentarios
       onCommentAdded(newComment);
 
-      // Reiniciar el formulario
       reset();
     } catch (error) {
       console.error('Error al crear el comentario:', error);

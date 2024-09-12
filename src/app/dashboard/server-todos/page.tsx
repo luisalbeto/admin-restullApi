@@ -29,8 +29,9 @@ export default async function ServerTodosPage(){
 
   return(
   <>
-  <h1 className="text-3xl mb-10 text-center font-bold">Crear un evento Server Side Rendering</h1>
     <div className="w-full px-3 mx-5 mb-5">
+    <h1 className="text-3xl mb-10 text-center font-bold">Crear un evento Server Side Rendering</h1>
+
     <NewTodo/>
 
 
