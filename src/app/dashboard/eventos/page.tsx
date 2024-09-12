@@ -1,7 +1,12 @@
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+
+
 import { auth } from "@/auth.config"
 import prisma from "@/lib/prisma"
 import { TodosGrid } from "@/todos"
-import { redirect } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 
 
 export default async function PRofilePage() {
@@ -16,7 +21,6 @@ export default async function PRofilePage() {
     where: { userID: session.user.id},
     orderBy: { description: 'asc' }
    })
-  
   
   return(
     <div>
